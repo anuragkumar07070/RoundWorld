@@ -72,7 +72,6 @@ Ensure you have installed:
    Visit: http://localhost:3000
 ---
 ## ⚙ Folder Structure
-      ```text
       RoundWorld/
       ├── public/
       │   ├── css/
