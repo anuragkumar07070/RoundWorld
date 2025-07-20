@@ -72,22 +72,52 @@ Ensure you have installed:
    Visit: http://localhost:3000
 ---
 ## ⚙ Folder Structure
-   ```java
-   RoundWorld/
-   ├── public/
-   │   ├── css/
-   │   ├── images/
-   │   └── js/
-   ├── views/
-   │   ├── includes/
-   │   ├── layouts/
-   │   └── listings/
-   ├── routes/
-   ├── models/
-   ├── controllers/
-   ├── .env
-   ├── app.js
-   └── package.json
+      ```text
+      RoundWorld/
+      ├── public/
+      │   ├── css/
+      │   ├── images/
+      │   └── js/
+      ├── views/
+      │   ├── includes/
+      │   ├── layouts/
+      │   └── listings/
+      ├── routes/
+      ├── models/
+      ├── controllers/
+      ├── .env
+      ├── app.js
+      └── package.json
+
+## 🔮 Future Enhancements
+- **Payment Gateway Integration** (Stripe/PayPal).  
+- **Reviews & Ratings** for user feedback.  
+- **Image Uploads** using Cloudinary.  
+- **Real-Time Notifications** for bookings.  
+- **Multilingual Support** for global users.
+
+---
+
+## 🤝 Contributing
+We welcome contributions!
+
+1. Fork the repo.  
+2. Create a branch: `git checkout -b feature-name`.  
+3. Commit changes: `git commit -m "Add feature"`.  
+4. Push: `git push origin feature-name`.  
+5. Submit a Pull Request.
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License**.
+
+---
+
+## 🙌 Acknowledgments
+- Thanks to the open-source tools powering this platform: **Node.js, Express.js, MongoDB, and Bootstrap**.  
+- Special appreciation to contributors and testers for their support.
+
 
 
 
