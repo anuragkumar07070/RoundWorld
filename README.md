@@ -56,3 +56,8 @@ Ensure you have installed:
    ```bash
    git clone https://github.com/your-username/RoundWorld.git
    cd RoundWorld
+   npm install
+   PORT=3000
+   MONGO_URI=<your_mongodb_connection_string>
+   JWT_SECRET=<your_secret_key>
+
