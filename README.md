@@ -56,10 +56,41 @@ Ensure you have installed:
    ```bash
    git clone https://github.com/your-username/RoundWorld.git
    cd RoundWorld
-   
+2. **Install Dependencies**
+   ```bash
    npm install
-   
+3. **Setup Environment Variables**
+   Create a .env file and add:
+   ```bash
    PORT=3000
    MONGO_URI=<your_mongodb_connection_string>
    JWT_SECRET=<your_secret_key>
+4. **Start the Application**
+   ```bash
+   npm start
+5. **Access the App**
+   Visit: http://localhost:3000
+---
+## ⚙ Folder Structure
+   ```java
+   RoundWorld/
+   ├── public/
+   │   ├── css/
+   │   ├── images/
+   │   └── js/
+   ├── views/
+   │   ├── includes/
+   │   ├── layouts/
+   │   └── listings/
+   ├── routes/
+   ├── models/
+   ├── controllers/
+   ├── .env
+   ├── app.js
+   └── package.json
+
+
+
+
+
 
