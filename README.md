@@ -69,7 +69,7 @@ Ensure you have installed:
    ```bash
    npm start
 5. **Access the App**
-   Visit: https://round-world.onrender.com/
+   Visit: localhost:3000
 ---
 ## ⚙ Folder Structure
       RoundWorld/
