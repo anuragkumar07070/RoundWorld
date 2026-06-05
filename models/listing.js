@@ -1,53 +1,58 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Review =require("./review.js");
+const Review = require("./review.js");
 
 const listingSchema = new Schema({
     title: {
         type: String,
         required: true,
-
     },
     description: {
         type: String,
         required: true,
-
     },
     image: {
         filename: {
             type: String,
-            default: 'listingimage', // Default filename if not provided
+            default: 'listingimage',
         },
         url: {
             type: String,
-            default: 'https://images.unsplash.com/photo-1735675376752-2e0fb3de9f69?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // Default image URL
-            set: (v) => v === "" ? 'https://images.unsplash.com/photo-1735675376752-2e0fb3de9f69?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' : v, // Setter function for empty string
+            default: 'https://images.unsplash.com/photo-1735675376752-2e0fb3de9f69',
         },
     },
-    price: Number,
+    price: {
+        type: Number,
+        required: true,
+        min: 0,
+    },
     location: String,
     country: String,
-    reviews: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref:"Review"
-        }
-    ],
-
-    owner :{
+    
+    // NEW: Tags field
+    tags: [{
+        type: String,
+        enum: ['beach', 'mountain', 'desert', 'forest', 'lake', 'city', 
+               'countryside', 'luxury', 'budget', 'family', 'romantic', 
+               'adventure', 'ski', 'tropical', 'historical', 'modern'],
+    }],
+    
+    reviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Review",
+    }],
+    
+    owner: {
         type: Schema.Types.ObjectId,
-        ref:"User",
+        ref: "User",
     }
-    
-});
+}, { timestamps: true });
 
-listingSchema.post("findOneAndDelete",async(listing)=>{
-    if(listing){
-        await Review.deleteMany({_id : {$in : listing.reviews}});
+listingSchema.post("findOneAndDelete", async (listing) => {
+    if (listing) {
+        await Review.deleteMany({ _id: { $in: listing.reviews } });
     }
-    
-})
+});
 
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;
- 

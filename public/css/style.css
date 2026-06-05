@@ -102,6 +102,37 @@ body {
 }
 
 
+
+.btn-add-lg {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+}
+/* Add these styles to complement the new design */
+.btn-add {
+    background-color: #fe424d;
+    color: white;
+    border-radius: 2rem;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-add:hover {
+    background-color: #dc3545;
+    transform: translateY(-2px);
+    color: white;
+}
+
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px 0;
+    margin-bottom: 40px;
+    border-radius: 10px;
+}
+
 /* show page */
 .show-img{
     height: 30vh;
@@ -116,3 +147,97 @@ body {
     padding-right: 0;
 
 }
+
+/* Tags styling */
+.tag {
+    display: inline-block;
+    padding: 5px 12px;
+    margin: 3px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    transition: transform 0.2s;
+}
+
+.tag:hover {
+    transform: translateY(-2px);
+}
+
+.tag-filter {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 25px;
+    background: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.tag-filter:hover {
+    background: #fe424d;
+    color: white;
+    transform: scale(1.05);
+}
+
+.tag-filter.active {
+    background: #fe424d;
+    color: white;
+}
+
+.tag-checkbox {
+    display: inline-flex;
+    align-items: center;
+    margin: 5px;
+    padding: 8px 15px;
+    border-radius: 25px;
+    background: #f0f0f0;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tag-checkbox.selected {
+    background: #fe424d;
+    color: white;
+}
+
+/* Tag group on listing cards */
+.tags-container {
+    margin: 10px 0;
+}
+
+/* Sidebar filters */
+.tag-filters .badge {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    transition: all 0.2s;
+}
+
+.tag-filters .badge:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+
+/* Animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.listing-card {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Stagger animation for cards */
+.listing-card:nth-child(1) { animation-delay: 0.05s; }
+.listing-card:nth-child(2) { animation-delay: 0.1s; }
+.listing-card:nth-child(3) { animation-delay: 0.15s; }
+.listing-card:nth-child(4) { animation-delay: 0.2s; }
+.listing-card:nth-child(5) { animation-delay: 0.25s; }
+.listing-card:nth-child(6) { animation-delay: 0.3s; }

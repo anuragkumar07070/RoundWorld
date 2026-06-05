@@ -1,43 +1,53 @@
 const express = require("express");
-const router = express.Router({mergeParams:true});
-const Listing = require("../models/listing.js");
-const wrapAsync = require("../utils/wrapAsync.js");
-const {listingSchema} = require("../schema.js");
-const {isLoggedIn, isOwner, validateListing} = require("../middleware.js");
+const router = express.Router();
+const wrapAsync = require("../utils/wrapAsync");
+const controllers = require("../controllers/listing");
 
-const controllers = require("../controllers/listing.js");
-
-// upload image
+// Multer for image upload
 const multer = require("multer");
-const {storage} = require("../cloudConfig.js");
-const upload = multer({storage});
+const { storage } = require("../cloudConfig");
+const upload = multer({ storage });
 
+// Simple auth middleware
+const isLoggedIn = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        req.session.redirectUrl = req.originalUrl;
+        req.flash("error", "Please login to continue");
+        return res.redirect("/login");
+    }
+    next();
+};
 
-// index route
+// Index and Create routes
 router
     .route("/")
     .get(wrapAsync(controllers.index))
-    // Create Route
-    .post(isLoggedIn,upload.single('listing[image]'),validateListing ,wrapAsync(controllers.createListing));
+    .post(
+        isLoggedIn,
+        upload.single('listing[image]'),
+        wrapAsync(controllers.createListing)
+    );
 
+// New route
+router.get("/new", isLoggedIn, controllers.newForm);
 
+// Show route
+router.get("/:id", wrapAsync(controllers.showListing));
 
-//New Route
-router.get("/new",isLoggedIn,controllers.newForm);
+// Tag filter route
+router.get("/tags/:tag", wrapAsync(controllers.getListingsByTag));
 
-router.route("/:id")
-    //Show Route
-    .get(wrapAsync(controllers.showListing))
+// Edit route
+router.get("/:id/edit", isLoggedIn, wrapAsync(controllers.editListing));
 
-    // Update
-    .patch(isLoggedIn,isOwner,upload.single('listing[image]'),validateListing, wrapAsync(controllers.updateListing))
+// Update route
+router.patch("/:id", 
+    isLoggedIn, 
+    upload.single('listing[image]'),
+    wrapAsync(controllers.updateListing)
+);
 
-    //Delete 
-    .delete(isLoggedIn,isOwner,wrapAsync(controllers.deleteListing));
-
-
-// Edit
-router.get("/:id/edit", isLoggedIn,isOwner, wrapAsync(controllers.editListing));
-
+// Delete route
+router.delete("/:id", isLoggedIn, wrapAsync(controllers.deleteListing));
 
 module.exports = router;

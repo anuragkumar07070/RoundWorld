@@ -1,24 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const User = require("../models/user");
 const wrapAsync = require('../utils/wrapAsync');
 const passport = require('passport');
-const { saveRedirectUrl } = require('../middleware');
+const { saveRedirectUrl, isLoggedIn } = require('../middleware');  // Add isLoggedIn here
 const controllers = require("../controllers/user");
 
-
- 
-router.route("/signup")
-    .get( controllers.renderSignUp)
+// Signup routes
+router
+    .route("/signup")
+    .get(controllers.renderSignUp)
     .post(wrapAsync(controllers.signup));
 
-router.route("/login")
-    // Login
+// Login routes
+router
+    .route("/login")
     .get(controllers.renderLogin)
-    // Authenication  Login
-    .post(saveRedirectUrl, passport.authenticate("local", { failureRedirect: '/login', failureFlash: true }), wrapAsync(controllers.loginAuthentication));
+    .post(
+        saveRedirectUrl,
+        passport.authenticate("local", { 
+            failureRedirect: '/login', 
+            failureFlash: true 
+        }),
+        wrapAsync(controllers.loginAuthentication)
+    );
 
-// Logout
-router.get("/logout",controllers.logout);
+// Logout route
+router.get("/logout", controllers.logout);
+
+// Profile routes (make sure controllers.getProfile and controllers.updateProfile exist)
+router.get("/profile", isLoggedIn, wrapAsync(controllers.getProfile));
+router.get("/user/:id", wrapAsync(controllers.getProfile));
+router.put("/profile", isLoggedIn, wrapAsync(controllers.updateProfile));
 
 module.exports = router;
